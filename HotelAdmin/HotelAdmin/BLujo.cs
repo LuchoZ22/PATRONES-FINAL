@@ -17,29 +17,10 @@ namespace HotelAdmin
             servicioCena = new ServicioCena("rodizio del menú + refresco ilimitado", false, false);
         }
         
-        public override void SetAreaLudica()
-        {
-            habitacion.areasLudicas = areasLudicas;
-        }
-
-        public override void SetDesayuno()
-        {
-            habitacion.desayuno = desayuno;
-        }
 
         public override void SetPrecio()
         {
             habitacion.precio = 350;
-        }
-
-        public override void SetServicioBar()
-        {
-            habitacion.servicioBar = servicioBar;
-        }
-
-        public override void SetServicioCena()
-        {
-            habitacion.servicioCena = servicioCena;
         }
 
         public override void SetTipo()

@@ -21,10 +21,23 @@ namespace HotelAdmin
 
         public abstract void SetTipo();
         public abstract void SetPrecio();
-        public abstract void SetServicioCena();
-        public abstract void SetServicioBar();
-        public abstract void SetAreaLudica();
-        public abstract void SetDesayuno();
+        public  void SetServicioCena()
+        {
+            habitacion.servicioCena = servicioCena;
+        }
+        public  void SetServicioBar()
+        {
+            habitacion.servicioBar = servicioBar;
+        }
+        public void SetAreaLudica()
+        {
+            habitacion.areasLudicas = areasLudicas;
+        }
+        public  void SetDesayuno()
+        {
+            habitacion.desayuno = desayuno;
+        }
+
         public LeafHabitacion  GetHabitacion()
         {
             LeafHabitacion h = habitacion;
