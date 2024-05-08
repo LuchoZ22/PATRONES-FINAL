@@ -30,7 +30,7 @@ namespace HotelAdmin
             h.GetDetalle();
             */
 
-            AdministradorHabitaciones admin = new AdministradorHabitaciones();
+            CreadorPaquetes admin = new CreadorPaquetes();
             var aux = admin.CrearOne(builderLujo);
             ComponentServicio basePaquete = new PaqueteBase(aux);
             basePaquete.GetDetalle();
