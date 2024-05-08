@@ -22,6 +22,11 @@ namespace HotelAdmin
 
         }
 
+        public LeafHabitacion(int descuento, string nombre) : base(descuento, nombre)
+        {
+
+        }
+
         public LeafHabitacion(string tipo, double precio, ServicioCena servicioCena, ServicioBar servicioBar, AreasLudicas areasLudicas, Desayuno desayuno, double descuento, string nombre) : base (descuento, nombre)
         {
             this.tipo = tipo;
@@ -34,6 +39,11 @@ namespace HotelAdmin
 
         public override void GetDetalle()
         {
+            Console.WriteLine("PAQUETE ONE");
+            Console.WriteLine($"Tipo: {tipo}");
+        }
+        public override void GetDetalleCompleto()
+        {
             Console.WriteLine($"HABITACION TIPO: {tipo}");
             Console.WriteLine($"Precio Real: {GetPrecioReal()} Bs");
             Console.WriteLine($"Precio Descuento: {GetPrecioConDescuento()} Bs");
@@ -44,6 +54,7 @@ namespace HotelAdmin
             desayuno.GetDetalle();
         }
 
+
         public override double GetPrecioConDescuento()
         {
             return precio - (precio * (base.Descuento/100.0));
@@ -53,5 +64,7 @@ namespace HotelAdmin
         {
             return precio;
         }
+
+        
     }
 }

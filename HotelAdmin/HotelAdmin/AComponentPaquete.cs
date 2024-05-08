@@ -20,5 +20,6 @@ namespace HotelAdmin
         public abstract double GetPrecioReal();
         public abstract double GetPrecioConDescuento();
         public abstract void GetDetalle();
+        public abstract void GetDetalleCompleto();
     }
 }

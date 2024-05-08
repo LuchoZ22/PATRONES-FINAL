@@ -9,21 +9,28 @@ namespace HotelAdmin
 {
     internal class PaqueteBase : ComponentServicio
     {
-        public PaqueteBase(double descuento, string nombre) : base(null, descuento, nombre) { }
+        public PaqueteBase(AComponentPaquete paquete) : base(paquete) 
+        { 
+        }
 
         public override double GetPrecioReal()
         {
-            return 100.0;
+            return base.paquete.GetPrecioReal();
         }
 
         public override double GetPrecioConDescuento()
         {
-            return GetPrecioReal() * (1 - Descuento);
+            return base.paquete.GetPrecioConDescuento();
         }
 
         public override void GetDetalle()
         {
-            Console.WriteLine($"Paquete base:  {Nombre}");
+            base.paquete.GetDetalle();
+        }
+
+        public override void GetDetalleCompleto()
+        {
+           base.paquete.GetDetalleCompleto();
         }
     }
 }

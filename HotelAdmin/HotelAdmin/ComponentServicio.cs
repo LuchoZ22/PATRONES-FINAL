@@ -6,28 +6,19 @@ using System.Threading.Tasks;
 
 namespace HotelAdmin
 {
-    internal abstract class ComponentServicio : AComponentPaquete
+    internal abstract class ComponentServicio 
     {
         protected AComponentPaquete paquete;
 
-        protected ComponentServicio(AComponentPaquete paquete, double descuento, string nombre) : base(descuento, nombre)
+        protected ComponentServicio(AComponentPaquete paquete)
         {
             this.paquete = paquete;
         }
 
-        public override double GetPrecioReal()
-        {
-            return paquete.GetPrecioReal();
-        }
+        public abstract double GetPrecioReal();
+        public abstract double GetPrecioConDescuento();
+        public abstract void GetDetalle();
+        public abstract void GetDetalleCompleto();
 
-        public override double GetPrecioConDescuento()
-        {
-            return paquete.GetPrecioConDescuento();
-        }
-
-        public override void GetDetalle()
-        {
-            paquete.GetDetalle();
-        }
     }
 }
