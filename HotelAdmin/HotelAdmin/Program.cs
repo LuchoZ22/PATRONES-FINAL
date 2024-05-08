@@ -30,15 +30,21 @@ namespace HotelAdmin
             h.GetDetalle();
             */
 
-            CreadorPaquetes admin = new CreadorPaquetes();
-            var aux = admin.CrearOne(builderLujo);
+           /*
+            var aux = CreadorPaquetes.CrearOne(builderLujo);
             ComponentServicio basePaquete = new PaqueteBase(aux);
             basePaquete.GetDetalle();
             ServicioExtraCine extraCine = new ServicioExtraCine(basePaquete);
             extraCine.GetDetalle();
             ServicioExtraInternet extraInternet = new ServicioExtraInternet(extraCine);
             extraInternet.GetDetalle();
-
+           */
+            AdminPaquetes adminPaquetes = new AdminPaquetes();
+            adminPaquetes.AñadirNuevoPaquete(1, 1);
+            adminPaquetes.AñadirNuevoPaquete(2, 2);
+            adminPaquetes.PrintPaquetes();
+            adminPaquetes.AñadirServicioPaquete(1, 1);
+            adminPaquetes.PrintPaquetes();
 
         }
     }
