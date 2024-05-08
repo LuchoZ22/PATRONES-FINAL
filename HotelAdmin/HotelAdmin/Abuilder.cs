@@ -19,6 +19,10 @@ namespace HotelAdmin
             habitacion = new LeafHabitacion();
         }
 
+        public void SetDescuento(int descuento)
+        {
+            habitacion.Descuento = descuento;
+        }
         public abstract void SetTipo();
         public abstract void SetPrecio();
         public  void SetServicioCena()

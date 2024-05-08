@@ -9,10 +9,11 @@ namespace HotelAdmin
     internal class DirectorHabitacion
     {
 
-        public static void BuildHabitacion(Abuilder builder)
+        public static void BuildHabitacion(Abuilder builder, int descuento)
         {
             builder.SetTipo();
             builder.SetPrecio();
+            builder.SetDescuento(descuento);
             builder.SetServicioCena();
             builder.SetServicioBar();
             builder.SetAreaLudica();

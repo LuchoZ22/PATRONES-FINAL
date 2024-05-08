@@ -19,11 +19,24 @@ namespace HotelAdmin
         public override void GetDetalle()
         {
             Console.WriteLine($"=== Paquete {Nombre} ===");
-            Console.WriteLine($"Descuento: {Descuento}");
-            Console.WriteLine("----- Habitaciones -----");
+            Console.WriteLine($"Descuento: {Descuento} %");
+            Console.WriteLine("----- Habitaciones -----\n");
             foreach (var p in paqueteActual)
             {
+                Console.Write("\t");
                 p.GetDetalle();
+            }
+        }
+
+        public override void GetDetalleCompleto()
+        {
+            Console.WriteLine($"=== Paquete {Nombre} ===");
+            Console.WriteLine($"Descuento: {Descuento} %");
+            Console.WriteLine("----- Habitaciones -----\n");
+            foreach (var p in paqueteActual)
+            {
+                Console.Write("\t");
+                p.GetDetalleCompleto();
             }
         }
 
@@ -54,6 +67,6 @@ namespace HotelAdmin
             paqueteActual.Remove(p);
         }
 
-        
+       
     }
 }
