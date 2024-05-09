@@ -27,8 +27,8 @@ namespace HotelAdmin
 
         public void AñadirNuevoPaquete(int paquete, int tipo)
         {
-            AComponentPaquete auxPaquete;
-            Abuilder auxBuilder;
+            AComponentPaquete auxPaquete = null;
+            Abuilder auxBuilder = null;
             switch (tipo) 
             {
                 case 1:
@@ -41,41 +41,54 @@ namespace HotelAdmin
                     auxBuilder = bInteligente;
                     break;
                 default:
-                    throw new ArgumentException("El tipo de habitacion solicitada es incorrecto");
+                    Console.WriteLine("ERROR: El tipo de habitacion solicitada es incorrecto");
+                    break;
             }
-
-            switch(paquete)
+            if(auxBuilder != null)
             {
-                case 1:
-                    auxPaquete = CreadorPaquetes.CrearOne(auxBuilder);
-                    break;
-                case 2:
-                    auxPaquete = CreadorPaquetes.CrearMedium(auxBuilder);
-                    break;
-                case 3:
-                    auxPaquete = CreadorPaquetes.CrearBig(auxBuilder);
-                    break;
-                default:
-                    throw new ArgumentException("El tipo de paquete es incorrecto");
-            }
-            ComponentServicio auxServicio = new PaqueteBase(auxPaquete);
+                switch (paquete)
+                {
+                    case 1:
+                        auxPaquete = CreadorPaquetes.CrearOne(auxBuilder);
+                        break;
+                    case 2:
+                        auxPaquete = CreadorPaquetes.CrearMedium(auxBuilder);
+                        break;
+                    case 3:
+                        auxPaquete = CreadorPaquetes.CrearBig(auxBuilder);
+                        break;
+                    default:
+                        Console.WriteLine("ERROR: El tipo de paquete es incorrecto");
+                        break;
+                }
+                if(auxPaquete != null) 
+                {
+                    ComponentServicio auxServicio = new PaqueteBase(auxPaquete);
 
-            paquetesServicio.Add(new Tuple<int, ComponentServicio>(++idCount, auxServicio));
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Nuevo Paquete Creado!!");
-            Console.ForegroundColor = ConsoleColor.White;
+                    paquetesServicio.Add(new Tuple<int, ComponentServicio>(++idCount, auxServicio));
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Nuevo Paquete Creado!!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                
+            }
+           
 
         }
 
         public void PrintListaPaquetes()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n############################### LISTA DE PAQUETES ###############################\n");
             Console.WriteLine("|ID\t|\tPAQUETE\t|\tTIPO\t|\tPRECIO\t|");
             Console.WriteLine("---------------------------------------------------------");
             foreach (var paquete in paquetesServicio)
             {
                 
-                Console.WriteLine($"| id: {paquete.Item1} | Paquete {paquete.Item2.GetNombrePaquete()}\t|Tipo: {paquete.Item2.GetTipo()}\t| Precio: {paquete.Item2.GetPrecioConDescuentoServicio()}\t|");
+                Console.WriteLine($"| id: {paquete.Item1} | Paquete {paquete.Item2.GetNombrePaquete()}\t|Tipo: {paquete.Item2.GetTipo()}\t| Precio: {paquete.Item2.GetPrecioConDescuentoServicio()} Bs\t|");
             }
+            Console.WriteLine("\n\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void PrintDetallesPaquetes()
@@ -91,16 +104,18 @@ namespace HotelAdmin
         }
 
 
-        public void PrintDescripcionPaquetes()
+        public void PrintDescripcionPaquete(int id)
         {
-            Console.WriteLine("\n############################### DESCRIPCION POR PAQUETE ###############################\n");
-            foreach (var paquete in paquetesServicio)
+            var paqueteServicio = paquetesServicio.Find(ps => ps.Item1 == id);
+            if(paqueteServicio != null) 
             {
-                Console.WriteLine($"------------------------ PAQUETE ID: {paquete.Item1} ------------------------");
-                paquete.Item2.GetDetalleCompletoServicio();
-                Console.WriteLine("---------------------------------------------------------------");
-                Console.WriteLine("\n\n");
+                Console.WriteLine($"\n############################### DESCRIPCION POR PAQUETE ID {id} ###############################\n");
+                paqueteServicio.Item2.GetDetalleCompletoServicio();
             }
+            else
+                Console.WriteLine($"ERROR: El paquete con el id: {id} no existe o ya fue eliminado");
+
+
         }
 
         public void AñadirServicioPaquete(int id, int servicio)

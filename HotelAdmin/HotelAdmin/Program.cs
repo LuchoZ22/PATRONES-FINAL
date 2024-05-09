@@ -32,19 +32,21 @@ namespace HotelAdmin
                         adminPaquetes.PrintDetallesPaquetes();
                         break;
                     case 4:
-                        adminPaquetes.PrintDescripcionPaquetes();
+                        Console.WriteLine("Ingrese el id del paquete");
+                        int id2 = GetValor("ID: ", 1, int.MaxValue);
+                        adminPaquetes.PrintDescripcionPaquete(id2);
                         break;
                     case 5:
                         Console.WriteLine("Ingrese el id del paquete");
                         int id = GetValor("ID: ", 1, int.MaxValue);
                         Console.WriteLine("Ingrese el Servicio Extra");
-                        Console.WriteLine("\t1. Internet(10 Bs)\n\t2. Gimnasio(20 Bs)\n\t3. Spa(20 Bs)\n\t4. Karaoke(30 Bs)\n\t5. Cine(30 Bs)");
+                        Console.WriteLine("\t1. Internet (10 Bs)\n\t2. Gimnasio (20 Bs)\n\t3. Spa (20 Bs)\n\t4. Karaoke (30 Bs)\n\t5. Cine (30 Bs)");
                         int servicio = GetValor("Opcion: ", 1, 5);
                         adminPaquetes.AñadirServicioPaquete(id, servicio);
                         break;
                     case 6:
                         Console.WriteLine("Ingrese el id del paquete que desea eliminar");
-                        int id1 = GetValor("ID: ",1,int.MaxValue);
+                        int id1 = GetValor("ID: ",1, int.MaxValue);
                         adminPaquetes.EliminarPaquete(id1);
                         break;
                     default:
@@ -60,7 +62,6 @@ namespace HotelAdmin
         public static int GetValor(string msg, int min, int max)
         {
             int aux;
-            
             do
             {
                 Console.Write(msg);
@@ -71,7 +72,7 @@ namespace HotelAdmin
         public static void PrintMenu()
         {
             Console.WriteLine("ADMINISTRADOR PAQUETES HOTEL");
-            Console.WriteLine("\t1. Nuevo Paquete\n\t2. Listar Paquetes Actuales\n\t3. Obtener Detalles Paquetes\n\t4. Obtener Descripcion Paquetes\n\t5. Añadir Servicio Extra a Paquete\n\t6. Eliminar Paquete\n\t7. Salir");
+            Console.WriteLine("\t1. Crear nuevo paquete\n\t2. Lista de paquetes actuales\n\t3. Obtener detalles de cada paquete\n\t4. Obtener descripcion completa de paquete \n\t5. Añadir servicio extra a un paquete\n\t6. Eliminar un paquete\n\t7. Salir");
         }
     }
 }

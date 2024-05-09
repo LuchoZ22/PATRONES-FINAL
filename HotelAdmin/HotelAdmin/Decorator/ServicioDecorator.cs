@@ -40,7 +40,7 @@ namespace HotelAdmin
 
         public override void GetDetalleCompletoServicio()
         {
-            paqueteBase.GetDetalleCompletoServicio();
+            base.paquete.GetDetalleCompleto();
             Console.WriteLine("\n-- Extras --");
             PrintExtras();
             Console.ForegroundColor = ConsoleColor.Blue;

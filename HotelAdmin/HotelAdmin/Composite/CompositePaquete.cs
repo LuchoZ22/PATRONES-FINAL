@@ -23,7 +23,6 @@ namespace HotelAdmin
             Console.WriteLine("----- Habitaciones -----\n");
             foreach (var p in paqueteActual)
             {
-                Console.Write("\t");
                 p.GetDetalle();
             }
         }

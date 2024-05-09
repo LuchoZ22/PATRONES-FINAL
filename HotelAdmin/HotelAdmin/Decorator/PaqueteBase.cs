@@ -33,7 +33,11 @@ namespace HotelAdmin
 
         public override void GetDetalleCompletoServicio()
         {
-           base.paquete.GetDetalleCompleto();
+            base.paquete.GetDetalleCompleto();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"\nPRECIO TOTAL: {GetPrecioRealServicio()} Bs");
+            Console.WriteLine($"PRECIO TOTAL CON DESCUENTOS: {GetPrecioConDescuentoServicio()} Bs");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public override void PrintExtras()
