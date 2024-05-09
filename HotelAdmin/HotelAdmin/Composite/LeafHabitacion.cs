@@ -39,8 +39,7 @@ namespace HotelAdmin
 
         public override void GetDetalle()
         {
-            Console.WriteLine("PAQUETE ONE");
-            Console.WriteLine($"Tipo: {Tipo}");
+            Console.WriteLine($"PAQUETE ONE - Tipo: {Tipo} | {GetPrecioConDescuento()} Bs");
         }
         public override void GetDetalleCompleto()
         {

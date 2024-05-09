@@ -19,10 +19,15 @@ namespace HotelAdmin
         public abstract double GetPrecioConDescuentoServicio();
         public abstract void GetDetalleServicio();
         public abstract void GetDetalleCompletoServicio();
-
+        public abstract void PrintExtras();
         public string GetNombrePaquete()
         {
             return paquete.Nombre;
+        }
+
+        public string GetTipo()
+        {
+            return paquete.Tipo;
         }
 
     }

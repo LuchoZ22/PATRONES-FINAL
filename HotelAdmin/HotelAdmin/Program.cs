@@ -6,46 +6,72 @@ namespace HotelAdmin
     {
         static void Main(string[] args)
         {
-            Abuilder builderEstandar = new BEstandar();
-            Abuilder builderLujo = new BLujo();
-            Abuilder builderInteligente = new BInteligente();
-            /*
-            //PRUEBAS LUCHO
-           
-
-            DirectorHabitacion.BuildHabitacion(builderEstandar);
-            LeafHabitacion h = builderEstandar.GetHabitacion();
-            h.GetDetalle();
-
-            Console.WriteLine("\n#########################################################################\n");
-
-            DirectorHabitacion.BuildHabitacion(builderLujo);
-            h = builderLujo.GetHabitacion();
-            h.GetDetalle();
-
-            Console.WriteLine("\n#########################################################################\n");
-
-            DirectorHabitacion.BuildHabitacion(builderInteligente);
-            h = builderInteligente.GetHabitacion();
-            h.GetDetalle();
-            */
-
-           /*
-            var aux = CreadorPaquetes.CrearOne(builderLujo);
-            ComponentServicio basePaquete = new PaqueteBase(aux);
-            basePaquete.GetDetalle();
-            ServicioExtraCine extraCine = new ServicioExtraCine(basePaquete);
-            extraCine.GetDetalle();
-            ServicioExtraInternet extraInternet = new ServicioExtraInternet(extraCine);
-            extraInternet.GetDetalle();
-           */
             AdminPaquetes adminPaquetes = new AdminPaquetes();
-            adminPaquetes.AñadirNuevoPaquete(1, 1);
-            adminPaquetes.AñadirNuevoPaquete(2, 2);
-            adminPaquetes.PrintPaquetes();
-            adminPaquetes.AñadirServicioPaquete(1, 1);
-            adminPaquetes.PrintPaquetes();
+            int opcion = 0;
+            int salir = 7;
+            while(opcion != salir)
+            {
+                PrintMenu();
+                opcion = GetValor("Opcion: ", 1, salir);
+                Console.Clear();
+                switch(opcion) 
+                {
+                    case 1:
+                        Console.WriteLine("Ingrese tipo de paquete:");
+                        Console.WriteLine("\t1. ONE\n\t2. MEDIUM\n\t3. BIG");
+                        int paquete = GetValor("Opcion: ", 1, 3);
+                        Console.WriteLine("Ingrese el tipo de habitacion: ");
+                        Console.WriteLine("\t1. Estándar\n\t2. Lujo\n\t3. Inteligente");
+                        int tipo = GetValor("Opcion: ", 1, 3);
+                        adminPaquetes.AñadirNuevoPaquete(paquete, tipo);
+                        break;
+                    case 2:
+                        adminPaquetes.PrintListaPaquetes();
+                        break;
+                    case 3:
+                        adminPaquetes.PrintDetallesPaquetes();
+                        break;
+                    case 4:
+                        adminPaquetes.PrintDescripcionPaquetes();
+                        break;
+                    case 5:
+                        Console.WriteLine("Ingrese el id del paquete");
+                        int id = GetValor("ID: ", 1, int.MaxValue);
+                        Console.WriteLine("Ingrese el Servicio Extra");
+                        Console.WriteLine("\t1. Internet(10 Bs)\n\t2. Gimnasio(20 Bs)\n\t3. Spa(20 Bs)\n\t4. Karaoke(30 Bs)\n\t5. Cine(30 Bs)");
+                        int servicio = GetValor("Opcion: ", 1, 5);
+                        adminPaquetes.AñadirServicioPaquete(id, servicio);
+                        break;
+                    case 6:
+                        Console.WriteLine("Ingrese el id del paquete que desea eliminar");
+                        int id1 = GetValor("ID: ",1,int.MaxValue);
+                        adminPaquetes.EliminarPaquete(id1);
+                        break;
+                    default:
+                        break;
 
+                }
+            }
+            
+
+            
+        }
+
+        public static int GetValor(string msg, int min, int max)
+        {
+            int aux;
+            
+            do
+            {
+                Console.Write(msg);
+            }
+            while (!(int.TryParse(Console.ReadLine(), out aux) || aux < min || aux > max));
+            return aux;
+        }
+        public static void PrintMenu()
+        {
+            Console.WriteLine("ADMINISTRADOR PAQUETES HOTEL");
+            Console.WriteLine("\t1. Nuevo Paquete\n\t2. Listar Paquetes Actuales\n\t3. Obtener Detalles Paquetes\n\t4. Obtener Descripcion Paquetes\n\t5. Añadir Servicio Extra a Paquete\n\t6. Eliminar Paquete\n\t7. Salir");
         }
     }
 }

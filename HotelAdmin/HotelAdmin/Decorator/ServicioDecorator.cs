@@ -30,16 +30,30 @@ namespace HotelAdmin
 
         public override void GetDetalleServicio()
         {
-            paqueteBase.GetDetalleServicio();
-            //Console.WriteLine("--- EXTRAS ---");
-            Console.WriteLine($"\nServicio extra: {nombreServicio}");
+            base.paquete.GetDetalle();
+            Console.WriteLine("\n-- Extras --");
+            PrintExtras();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"\nPRECIO TOTAL CON DESCUENTOS: {GetPrecioConDescuentoServicio()} Bs");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public override void GetDetalleCompletoServicio()
         {
             paqueteBase.GetDetalleCompletoServicio();
-            //Console.WriteLine("--- EXTRAS ---");
-            Console.WriteLine($"\nServicio extra: {nombreServicio}");
+            Console.WriteLine("\n-- Extras --");
+            PrintExtras();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"\nPRECIO TOTAL SIN DESCUENTOS: {GetPrecioRealServicio()} Bs");
+            Console.WriteLine($"\nPRECIO TOTAL CON DESCUENTOS: {GetPrecioConDescuentoServicio()} Bs");
+            Console.ForegroundColor = ConsoleColor.White;
         }
+
+        public override void PrintExtras()
+        {
+            paqueteBase.PrintExtras();
+            Console.WriteLine($"Extra: Servicio {nombreServicio} | {costoExtra} Bs");
+        }
+
     }
 }

@@ -61,14 +61,45 @@ namespace HotelAdmin
             ComponentServicio auxServicio = new PaqueteBase(auxPaquete);
 
             paquetesServicio.Add(new Tuple<int, ComponentServicio>(++idCount, auxServicio));
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Nuevo Paquete Creado!!");
+            Console.ForegroundColor = ConsoleColor.White;
 
         }
 
-        public void PrintPaquetes()
+        public void PrintListaPaquetes()
         {
-            foreach(var paquete in paquetesServicio)
+            Console.WriteLine("|ID\t|\tPAQUETE\t|\tTIPO\t|\tPRECIO\t|");
+            Console.WriteLine("---------------------------------------------------------");
+            foreach (var paquete in paquetesServicio)
             {
-                Console.WriteLine($"| id: {paquete.Item1} | Paquete {paquete.Item2.GetNombrePaquete()}\t|Tipo: {paquete.Item2.paquete.Tipo}\t| Precio: {paquete.Item2.GetPrecioConDescuentoServicio()}");
+                
+                Console.WriteLine($"| id: {paquete.Item1} | Paquete {paquete.Item2.GetNombrePaquete()}\t|Tipo: {paquete.Item2.GetTipo()}\t| Precio: {paquete.Item2.GetPrecioConDescuentoServicio()}\t|");
+            }
+        }
+
+        public void PrintDetallesPaquetes()
+        {
+            Console.WriteLine("\n############################### DETALLES POR PAQUETE ###############################\n");
+            foreach (var paquete in paquetesServicio)
+            {
+                Console.WriteLine($"------------------------ PAQUETE ID: {paquete.Item1} ------------------------");
+                paquete.Item2.GetDetalleServicio();
+                Console.WriteLine("---------------------------------------------------------------");
+                Console.WriteLine("\n\n");
+            }
+        }
+
+
+        public void PrintDescripcionPaquetes()
+        {
+            Console.WriteLine("\n############################### DESCRIPCION POR PAQUETE ###############################\n");
+            foreach (var paquete in paquetesServicio)
+            {
+                Console.WriteLine($"------------------------ PAQUETE ID: {paquete.Item1} ------------------------");
+                paquete.Item2.GetDetalleCompletoServicio();
+                Console.WriteLine("---------------------------------------------------------------");
+                Console.WriteLine("\n\n");
             }
         }
 
@@ -77,7 +108,7 @@ namespace HotelAdmin
             int servId = paquetesServicio.FindIndex((it => it.Item1 == id));
 
 
-            if (servId != null)
+            if (servId >= 0)
             {
                 ComponentServicio auxPaqueteServicio = paquetesServicio[servId].Item2;
                 ServicioDecorator decorator = null;
@@ -107,11 +138,25 @@ namespace HotelAdmin
                     // Update the item in paquetesServicio with the new decorator
                     
                     paquetesServicio[servId] = new Tuple<int, ComponentServicio>(id, decorator);
+                    Console.WriteLine("\n********************************************************");
                     Console.WriteLine($"Servicio extra '{decorator.nombreServicio}' agregado al paquete con id: {id}");
+                    Console.WriteLine("********************************************************\n");
                 }
             }
             else
                 Console.WriteLine($"ERROR: El paquete con el id: {id} no existe o ya fue eliminado");
+        }
+
+        public void EliminarPaquete(int id)
+        {
+            int servId = paquetesServicio.FindIndex((it => it.Item1 == id));
+            if (servId != -1) 
+            {
+                paquetesServicio.RemoveAt(servId);
+                Console.WriteLine($"~~ Paquete con ID: {id} fue eliminado! ~~");
+            }
+            else
+                Console.WriteLine("ERROR: El paquete con el id: {id} no existe o ya fue eliminado");
         }
 
     }
