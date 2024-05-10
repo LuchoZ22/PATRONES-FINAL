@@ -13,33 +13,54 @@ internal class Program
         Mediator mediator = new(servicioCocina, servicioBar, servicioLimpieza, servicioReportes);
         Visitor visitor = new();
 
-        // SOLICITUDES DE SERVICIOS
-        SolicitudServicio solicitud1 = new SolicitudServicio(512, "Cocina", "Un plato de spaguetti grande por favor.");
-        mediator.SolicitarServicio(solicitud1);
-        SolicitudServicio solicitud2 = new SolicitudServicio(240, "Reportes", "Hay una serpiente en mi bota.");
-        mediator.SolicitarServicio(solicitud2);
+        while(true)
+        {
+            Console.WriteLine("Qué desea hacer?");
+            Console.WriteLine("1. Registrar una solicitud de un cliente.");
+            Console.WriteLine("2. Reservar un horario en el spa");
+            Console.WriteLine("3. Obtener reporte de los sistemas y servicios.");
+            Console.WriteLine("0. Salir\n");
 
-        // SOLICITUDES DE RESERVA DEL SPA
-        SolicitudReserva solicitudReserva1 = new(316, 10);
-        sistemaSpa.ProcesarReserva(solicitudReserva1);
-        SolicitudReserva solicitudReserva2 = new(234, 9);
-        sistemaSpa.ProcesarReserva(solicitudReserva2);
-        SolicitudReserva solicitudReserva3 = new(928, 12);
-        sistemaSpa.ProcesarReserva(solicitudReserva3);
-        SolicitudReserva solicitudReserva4 = new(814, 10);
-        sistemaSpa.ProcesarReserva(solicitudReserva4);
-        SolicitudReserva solicitudReserva5 = new(504, 15);
-        sistemaSpa.ProcesarReserva(solicitudReserva5);
-        SolicitudReserva solicitudReserva6 = new(104, 10);
-        sistemaSpa.ProcesarReserva(solicitudReserva6);
-        SolicitudReserva solicitudReserva7 = new(582, 12);
-        sistemaSpa.ProcesarReserva(solicitudReserva7);
+            int opcion = int.Parse(Console.ReadLine());
+            if (opcion == 0) break;
+            else if(opcion == 1)
+            {
+                Console.Write("Numero de habitación: ");
+                int nroHabitacion = int.Parse(Console.ReadLine());
 
-        // REPORTES DE USOS Y COSTO GENERADO
-        servicioCocina.Aceptar(visitor);
-        servicioBar.Aceptar(visitor);
-        servicioLimpieza.Aceptar(visitor);
-        servicioReportes.Aceptar(visitor);
-        sistemaSpa.Aceptar(visitor);
+                Console.Write("Servicio solicitado (Cocina, Bar, Limpieza, Reportes): ");
+                string servicio = Console.ReadLine();
+                servicio ??= string.Empty;
+
+                Console.Write("Descripcion de la solicitud: ");
+                string descripcion = Console.ReadLine();
+                descripcion ??= string.Empty;
+
+                SolicitudServicio solicitud = new(nroHabitacion, servicio, descripcion);
+                mediator.SolicitarServicio(solicitud);
+                Console.WriteLine();
+            }
+            else if(opcion == 2)
+            {
+                Console.Write("Numero de habitación: ");
+                int nroHabitacion = int.Parse(Console.ReadLine());
+
+                Console.Write("Hora de la reserva (formato 24 horas): ");
+                int horario = int.Parse(Console.ReadLine());
+
+                SolicitudReserva solicitud = new(nroHabitacion, horario);
+                sistemaSpa.ProcesarReserva(solicitud);
+                Console.WriteLine();
+            }
+            else if(opcion == 3)
+            {
+                servicioCocina.Aceptar(visitor);
+                servicioBar.Aceptar(visitor);
+                servicioLimpieza.Aceptar(visitor);
+                servicioReportes.Aceptar(visitor);
+                sistemaSpa.Aceptar(visitor);
+                Console.WriteLine();
+            }
+        }
     }
 }
