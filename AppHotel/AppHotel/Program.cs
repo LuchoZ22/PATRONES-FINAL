@@ -154,6 +154,8 @@ namespace AppHotel
             {
                 if (index >= 1 && index <= comandosAgregados.Count)
                 {
+                    ICommand comandoARemover = comandosAgregados[index - 1];
+                    appHotel.removerCommand(comandoARemover);
                     comandosAgregados.RemoveAt(index - 1);
                     Console.WriteLine("Comando removido con éxito.");
                 }
